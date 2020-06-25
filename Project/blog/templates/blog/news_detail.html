@@ -1,0 +1,44 @@
+{% extends 'blog/main.html' %}
+{% block main_section %}
+<div class="alert alert-light">
+  <a href="{% url 'blog-home' %}">Вернутся назад</a>
+    <h1>{{object.title}}</h1>
+    <p>{{object.text|safe}}</p>
+    <div class="row">
+      <div class="col-md-2">
+      <img src="{{ object.avtor.profile.img.url }}" alt="{{ ob.avtor }}" class="user_image">
+      </div>
+      <div class="col-md-10">
+        <span class="text-muted">{{ object.date|date:"d E Y в H:i:s" }}</span>
+        {% if object.avtor %}
+        <p><b>Автор:</b><a href="/">{{ object.avtor}}</a></p>
+        {% else %}
+          <p><b>Автор:</b><mark>Админ</mark></P>
+        {% endif %}
+      </div>
+    </div>
+    {% if object.avtor == user %}
+    <hr>
+     <a href="{% url  'news-update' object.id %}"class="btn btn-info">Обновить пост</a>
+     <a href="{% url  'news-delete' object.id %}"class="btn btn-danger">Удалить пост</a>
+    {% endif %}
+  </div>
+{% endblock main_section %}
+{% block aside_new_section %}
+<h3><b>Язык программирование Python</b></h3>
+  <img src="https://andreyex.ru/wp-content/uploads/2020/02/Kak-udalit-fajly-i-katalogi-v-Python.jpg" class="img-thumbnail">
+<p>
+ В русском языке распространено название пито́н[10])
+  высокоуровневый язык программирования общего назначения,
+  ориентированный на повышение производительности разработчика и читаемости кода.
+  Синтаксис ядра Python минималистичен.
+  В то же время стандартная библиотека включает большой объём полезных функций.
+  Python поддерживает структурное, объектно-ориентированное, функциональное,
+  императивное и аспектно-ориентированное программирование. Основные архитектурные черты — динамическая типизация,
+  автоматическое управление памятью, полная интроспекция, механизм обработки исключений, поддержка многопоточных вычислений,
+  высокоуровневые структуры данных. Поддерживается разбиение программ на модули, которые, в свою очередь, могут объединяться в пакеты.
+</p>
+<a href="https://ru.wikipedia.org/wiki/Python" target="_blank">
+  <button class="btn btn-warning">Посмотреть</button>
+</a>
+{% endblock aside_new_section %}

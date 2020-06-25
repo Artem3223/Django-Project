@@ -1,0 +1,27 @@
+{% extends 'blog/main.html' %}
+{% load crispy_forms_tags %}
+{% block main_section %}
+<div class="form-section">
+  <h2>Добавление новой статьи</h2>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+      <button type="submit" class="btn btn-outline-warning">Добавить статью</button>
+  </form>
+  <hr>
+</div>
+
+{% endblock main_section %}
+
+{% block aside_new_section %}
+<h3><b>Лучшее книги по программированию</b></h3>
+  <img src="https://lh3.googleusercontent.com/KTii_PGS_vI4AkTfQb5Biq41Jf1eQPpNW73P6F4cKS42ghcroHZ-7ueyd_102LDCU7KTH7h1LDOtvBBLFSAm6kgniUhhpk3BSNNnx_NJxrTpGu8jFjAuawuduZrs7WNV6CCk89vp" class="img-thumbnail mb-1">
+<p>
+  Python – это, пожалуй, один из немногих языков программирования, простых в освоении
+  и одновременно мощных. Это очень важно и для начинающих, и для специалистов, но
+  что ещё важнее – на нём приятно программировать.
+</p>
+<a href="https://wombat.org.ua/AByteOfPython/AByteofPythonRussian-2.01.pdf" target="_blank">
+  <button class="btn btn-warning">Посмотреть</button>
+</a>
+{% endblock aside_new_section %}

@@ -1,0 +1,62 @@
+{% extends 'blog/main.html' %}
+{% block main_section %}
+{% for post in news %}
+<div class="alert alert-light">
+    <h1>{{post.title}}</h1>
+    <p>{{post.text|striptags|truncatechars:200}}</p>
+    <div class="row">
+      <div class="col-md-2">
+      <img src="{{ post.avtor.profile.img.url }}" alt="{{ post.avtor }}" class="user_image">
+      </div>
+      <div class="col-md-10">
+        <span class="text-muted">{{ post.date|date:"d E Y в H:i:s" }}</span>
+        {% if post.avtor %}
+        <p><b>Автор:</b><mark> {{ post.avtor}}</mark></p>
+        {% else %}
+          <p><b>Автор:</b> <mark>Админ</mark></P>
+        {% endif %}
+      </div>
+    </div>
+    <a href="{% url 'news-detail' post.id %}" class="btn btn-outline-warning">Читать далее</a>
+  </div>
+{% endfor %}
+
+{% if is_paginated %}
+  {% if page_obj.has_previous %}
+     <a href="/" class="btn btn-outline-warning">Начало</a>
+     <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-warning">Предыдущая</a>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+      {% if num == page_obj.number %}
+       <button class="btn btn-warning">{{ num }}</button>
+       {% elif num > page_obj.number|add:'-1' and num < page_obj.number|add:'-1' %}
+          <a href="?page={{ num }}" class="btn btn-outline-warning">{{ num }}</a>
+      {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+       <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-warning">Следущая</a>
+       <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-warning">Последняя</a>
+      {% endif %}
+  {% endif %}
+{% endblock main_section %}
+
+{% block aside_new_section %}
+<h3><b>Язык программирование Python</b></h3>
+  <img src="https://andreyex.ru/wp-content/uploads/2020/02/Kak-udalit-fajly-i-katalogi-v-Python.jpg" class="img-thumbnail">
+<p>
+ В русском языке распространено название пито́н[10])
+  высокоуровневый язык программирования общего назначения,
+  ориентированный на повышение производительности разработчика и читаемости кода.
+  Синтаксис ядра Python минималистичен.
+  В то же время стандартная библиотека включает большой объём полезных функций.
+  Python поддерживает структурное, объектно-ориентированное, функциональное,
+  императивное и аспектно-ориентированное программирование. Основные архитектурные черты — динамическая типизация,
+  автоматическое управление памятью, полная интроспекция, механизм обработки исключений, поддержка многопоточных вычислений,
+  высокоуровневые структуры данных. Поддерживается разбиение программ на модули, которые, в свою очередь, могут объединяться в пакеты.
+</p>
+<a href="https://ru.wikipedia.org/wiki/Python" target="_blank">
+  <button class="btn btn-warning" >Посмотреть</button>
+</a>
+{% endblock aside_new_section %}

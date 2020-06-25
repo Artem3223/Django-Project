@@ -1,0 +1,29 @@
+body {
+  background: #fafafa
+}
+
+footer {
+  padding: 30px;
+  background: #333a41;
+  color: #f1efef;
+  float: left;
+  width: 100%;
+  margin-top: 50px;
+}
+
+.user_image {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.alert-light {
+  border-color: #bfbfbf
+}
+
+
+.alert-light {
+  border-color: #bfbfbf
+}

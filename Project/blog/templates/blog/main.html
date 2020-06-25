@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{{title}}</title>
+  <link rel="stylesheet" href= "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static 'blog/main.css' %}">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
+    <a class="navbar-brand" href="{% url 'blog-home' %}"><b>Project</b></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation" wfd-id="59">
+      <span class="navbar-toggler-icon" wfd-id="6"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExample09" wfd-id="5">
+      <ul class="navbar-nav mr-auto" wfd-id="80">
+        <li class="nav-item active" wfd-id="85">
+          <a class="nav-link" href="{% url 'blog-home' %}">Главная<span class="sr-only" wfd-id="86">(current)</span></a>
+        </li>
+        <li class="nav-item" wfd-id="84">
+          <a class="nav-link" href="{% url 'blog-contacti' %}">Про нас</a>
+        </li>
+      </ul>
+    </div>
+    <div class="navbar-nav">
+      {% if user.is_authenticated %}
+        <a href="{% url 'news-add' %}" class="btn btn-outline-secondary mr-2">Добавить статью</a>
+      <a href="{% url 'profile' %}" class="btn btn-outline-secondary mr-2">Профиль</a>
+      <a href="{% url 'exit' %}" class="btn btn-outline-secondary">Выход</a>
+      {% else %}
+      <a href="{% url 'reg' %}" class="btn btn-outline-secondary mr-2">Регистрация</a>
+      <a href="{% url 'user' %}" class="btn btn-outline-secondary">Войти</a>
+       {% endif %}
+    </div>
+  </nav>
+  <main class="container">
+   <div class="row">
+     <div class="col-md-8">
+       {% if messages %}
+          {% for mess in messages %}
+             <div class="alert alert-success">
+               {{ mess }}
+             </div>
+          {% endfor %}
+       {% endif %}
+
+       {% block main_section%}
+       {% endblock %}
+     </div>
+
+     <aside class="col-md-4">
+       <div class="bg-info p-3 md-3 rounded">
+         {% block aside_new_section %}
+         {% endblock %}
+       </div>
+         <div class="p-3 mb-3">
+          <img src="https://andreyex.ru/wp-content/uploads/2020/02/Kak-udalit-fajly-i-katalogi-v-Python.jpg" class="img-thumbnail">
+         </div>
+     </aside>
+   </div>
+  </main>
+
+  <footer>
+    <div class="container" wfd-id="3">
+      <p class="float-right">
+        <a href="#">Python Django</a>
+      </p>
+      <p>Python - это язык программирования, который позволяет вам быстро работать
+и более эффективно интегрировать системы</p>
+      <p>Миссия Python Software Foundation - продвигать, защищать и продвигать язык программирования Python, а также поддерживать и содействовать росту разнообразного и международного сообщества программистов Python<a href="https://www.python.org/">Python</a>Django<a href="/docs/4.4/getting-started/introduction/"></a></p>
+    </div>
+  </footer>
+</body>
+</html>
